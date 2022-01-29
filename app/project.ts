@@ -54,8 +54,8 @@ const getGalleryImages = async (imgs: string): Promise<Record<string, string>> =
   }, {});
 }
 
-const getThumbnail = async (thumbnail:string): Promise<string> => {
-    const thumbPath = path.join(assetsPath, '/screenshots', `${thumbnail}.png`)
+const getThumbnail = async (thumbnail:string, small?: boolean): Promise<string> => {
+    const thumbPath = path.join(assetsPath, small ? '/thumbnails' : '/screenshots', `${thumbnail}.png`)
     console.log(thumbPath);
     const file = await fs.readFile(thumbPath, { encoding: 'base64' });
     return file;
@@ -74,7 +74,7 @@ export async function getProjects() {
         file.toString()
       );
       const logos = await getStackLogos(attributes.stack);
-      const thumbnail = attributes.thumbnail && await getThumbnail(attributes.thumbnail);
+      const thumbnail = attributes.thumbnail && await getThumbnail(attributes.thumbnail, true);
       return {
         slug: filename.replace(/\.md$/, ""),
         title: attributes.title,
