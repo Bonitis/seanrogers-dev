@@ -5,9 +5,9 @@
   "license": "",
   "scripts": {
     "build": "npm run build:css && remix build",
-    "build:css": "tailwindcss -i ./app/styles/root.css -o ./app/tailwind.css --minify",
+    "build:css": "tailwindcss -i ./styles/root.css -o ./app/tailwind.css --minify",
     "dev": "concurrently \"npm run dev:css\" \"cross-env NODE_ENV=development netlify dev\"",
-    "dev:css": "tailwindcss -i ./app/styles/root.css -o ./app/tailwind.css --watch",
+    "dev:css": "tailwindcss -i ./styles/root.css -o ./app/tailwind.css --watch",
     "postinstall": "remix setup node"
   },
   "dependencies": {
