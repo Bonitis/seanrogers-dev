@@ -25,8 +25,8 @@ export interface ProjectPage extends Omit<ProjectMarkdownAttributes, 'gallery'> 
 }
 
 // relative to the server output not the source!
-const projectsPath = path.join(__dirname, "..", "projects");
-const assetsPath = path.join(__dirname, "..", "assets");
+const projectsPath = path.join(__dirname, "../../../../", "projects");
+const assetsPath = path.join(__dirname, "../../../../", "assets");
 
 const getStackLogos = async (stack: string): Promise<Record<string, string>> => {
     const technologies = stack.split(' | ');
@@ -62,6 +62,8 @@ const getThumbnail = async (thumbnail:string): Promise<string> => {
 }
 
 export async function getProjects() {
+  console.log(__dirname)
+  console.log(projectsPath)
   const dir = await fs.readdir(projectsPath);
   return Promise.all(
     dir.map(async filename => {

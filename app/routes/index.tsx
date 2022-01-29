@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "remix";
-import { getProjects, Project } from "~/project";
+import { getProjects, Project } from "../project";
 
 export const loader = () => {
     return getProjects();

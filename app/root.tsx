@@ -34,7 +34,7 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Sean Rogers" };
 };
 
 const THEME_KEY = 'dark_mode';

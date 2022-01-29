@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 import { getProject, ProjectPage } from "~/project";
