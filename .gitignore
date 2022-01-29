@@ -9,3 +9,7 @@ node_modules
 
 # Local Netlify folder
 .netlify
+node_modules
+/.cache
+/netlify/functions/server/build
+/public/build
