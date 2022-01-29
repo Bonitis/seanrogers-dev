@@ -8,7 +8,7 @@
   port = 3000
 
 [functions]
-  included_files = ["projects/**", "assets/**"]
+  included_files = ["projects/**"]
 
 [[redirects]]
   from = "/*"
