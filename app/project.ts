@@ -21,7 +21,7 @@ export interface ProjectMarkdownAttributes extends Omit<Project, 'logos'> {
 export interface ProjectPage extends Omit<ProjectMarkdownAttributes, 'gallery'> {
     html: string;
     logos: Project['logos'];
-    gallery: Record<string, string>;
+    gallery?: Record<string, string>;
 }
 
 // relative to the server output not the source!
@@ -88,13 +88,13 @@ export async function getProjects() {
   );
 }
 
-export async function getProject(slug: string) {
+export async function getProject(slug: string): Promise<ProjectPage> {
     const filepath = path.join(projectsPath, slug + ".md");
     const file = await fs.readFile(filepath);
     const { attributes, body } = parseFrontMatter<ProjectMarkdownAttributes>(file.toString());
     const html = marked(body);
     const logos = await getStackLogos(attributes.stack);
     const thumbnail = attributes.thumbnail && await getThumbnail(attributes.thumbnail);
-    const gallery = attributes.gallery && await getGalleryImages(attributes.gallery);
+    const gallery = attributes.gallery ? await getGalleryImages(attributes.gallery) : undefined;
     return { html, logos, ...attributes, thumbnail, gallery };
   }

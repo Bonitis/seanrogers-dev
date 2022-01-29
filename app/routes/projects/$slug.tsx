@@ -1,4 +1,4 @@
-import { useLoaderData } from "remix";
+import { MetaFunction, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 import { getProject, ProjectPage } from "~/project";
 
@@ -8,6 +8,16 @@ export const loader: LoaderFunction = async ({
     if (!params.slug) throw new Error('Missing slug');
     return getProject(params.slug);
 };
+
+export const meta: MetaFunction = ({ data, params }) => {
+    console.log(data || 'HEY NO DATA')
+    if (!data) return { title: params.slug || '', description: '', keywords: '' };
+    return {
+        title: data.title,
+        description: data.description || '',
+        keywords: data.stack ? data.stack.split(' | ').join(',') : ""
+    };
+  };
 
 export default function ProjectSlug() {
   const project = useLoaderData<ProjectPage>();
@@ -33,15 +43,17 @@ export default function ProjectSlug() {
         <hr className="border-t-1 mb-8 w-full border-solid border-slate-500" />
         <div className="md-body" dangerouslySetInnerHTML={{ __html: project.html }} />
         <div className="flex flex-wrap justify-center">
-            {Object.keys(project.gallery).length > 0 && Object.keys(project.gallery).map((key: string) => {
-                return project.gallery[key] && (
+            {project.gallery &&
+                Object.keys(project.gallery).length > 0 &&
+                Object.keys(project.gallery).map((key: string) => project.gallery?[key] && (
                     <img
+                        key={key}
                         src={`data:image/png;base64, ${project.gallery[key]}`}
                         alt={key}
                         className="w-full lg:w-72 h-fit m-4 rounded-md p-2 bg-slate-300 object-scale-down hover:shadow-md lg:hover:scale-150 transition-transform"
                     />
-                )
-            })}
+                ))
+            }
         </div>
     </div>
   );

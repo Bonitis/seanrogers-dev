@@ -34,7 +34,11 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-  return { title: "Sean Rogers" };
+  return {
+    title: "Sean Rogers",
+    description: "Software engineer and ex-founder with expertise in javascript/typescript, react, and building micro-service architecture.",
+    keywords: "javascript,typescript,react,node,micro-service,micro-frontend"
+  };
 };
 
 const THEME_KEY = 'dark_mode';
