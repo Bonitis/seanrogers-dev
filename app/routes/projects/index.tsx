@@ -1,5 +1,6 @@
 import { useLoaderData, Link } from "remix";
 import { getProjects, Project } from "../../project";
+import StackLogos from '../../components/StackLogos'
 
 export const loader = () => {
     return getProjects();
@@ -18,19 +19,7 @@ export default function Projects() {
                   <h3 className="text-slate-700 dark:text-white font-bold text-3xl pb-1">{project.title}</h3>
                   <p className="mt-4 font-light text-slate-800 dark:text-white">{project.description}</p>
                   <div className="flex mt-4">
-                    {Object.keys(project.logos).map((key: string) => {
-                      return project.logos[key] && (
-                        <div key={key} data-tooltip aria-description={key}>
-                          <img
-                              src={`data:image/png;base64, ${project.logos[key]}`}
-                              alt={`${key} logo`}
-                              height="32px"
-                              width="32px"
-                              className="rounded p-1"
-                          />
-                        </div>
-                      )
-                    })}
+                    <StackLogos logos={project.logos} size={32} />
                   </div>
                 </div>
                 <Link prefetch="intent" to={project.slug} className="text-indigo-800 dark:text-white hover:text-white dark:hover:text-indigo-800 hover:bg-indigo-800 dark:hover:bg-white cursor-pointer font-bold text-lg border-4 border-solid border-indigo-800 dark:border-white rounded-lg flex justify-center items-center mt-4 py-2 px-16 w-fit transition-colors">Details</Link>
