@@ -37,13 +37,10 @@
    const { src, width, height, fit } = extractParams(params, request);
  
    try {
-    const buffer = readFile(src);
-    return resizeFile(buffer, width, height, fit);
-    // return resizeFile(buffer, width, height, fit);
-    //  // read the image as a stream of bytes
-    //  const readStream = readFileAsStream(src);
-    //  // read the image from the file system and stream it through the sharp pipeline
-    //  return streamingResize(readStream, width, height, fit);
+     // read the image as a stream of bytes
+     const readStream = readFileAsStream(src);
+     // read the image from the file system and stream it through the sharp pipeline
+     return streamingResize(readStream, width, height, fit);
    } catch (error: unknown) {
      // if the image is not found, or we get any other errors we return different response types
      return handleError(error);
@@ -106,38 +103,13 @@
      }
    });
  }
-
-function resizeFile(file: Buffer, width?: number, height?: number, fit?: keyof FitEnum) {
-   return sharp(file)
-    .resize({
-      width,
-      height,
-      fit,
-      position: sharp.strategy.attention // will try to crop the image and keep the most interesting parts
-    })
-    .toFormat('png')
-    .toBuffer()
-    .then((buffer) => {
-      console.log(buffer.length);
-      return new Response(buffer, {
-        headers: {
-          "Content-Type": "image/*",
-          "Content-Length": `${buffer.length}`,
-          "Cache-Control": "public, max-age=31536000, immutable"
-        }
-      });
-    });
- }
-
- function readFile(src: string): Buffer {
-   return readFileSync(path.join(ASSETS_ROOT, src));
- }
  
  function readFileAsStream(src: string): ReadStream {
    // Local filesystem
  
    // check that file exists
    const srcPath = path.join(ASSETS_ROOT, src);
+   console.log(srcPath);
    const fileStat = statSync(srcPath);
    if (!fileStat.isFile()) {
      throw new Error(`${srcPath} is not a file`);

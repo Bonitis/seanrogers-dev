@@ -25,8 +25,8 @@ export interface ProjectPage extends Omit<ProjectMarkdownAttributes, 'gallery'> 
 }
 
 // relative to the server output not the source!
-const projectsPath = path.join(__dirname, "../../../../", "projects");
-const assetsPath = path.join(__dirname, "../../../../", "assets");
+const projectsPath = path.join(__dirname, "../..", "projects");
+const assetsPath = path.join(__dirname, "../..", "assets");
 
 // const getStackLogos = async (stack: string): Promise<Record<string, string>> => {
 //     const technologies = stack.split(' | ');
@@ -66,6 +66,8 @@ const getStackLogos = (stack: string): string[] => {
 }
 
 export async function getProjects() {
+  console.log(projectsPath);
+  console.log(__dirname);
   const dir = await fs.readdir(projectsPath);
   return Promise.all(
     dir.map(async filename => {
@@ -93,6 +95,6 @@ export async function getProject(slug: string): Promise<ProjectPage> {
     const file = await fs.readFile(filepath);
     const { attributes, body } = parseFrontMatter<ProjectMarkdownAttributes>(file.toString());
     const html = marked(body);
-    const gallery = attributes.gallery?.split(', ').map((name) => `${name}.png`);
+    const gallery = attributes.gallery?.split(', ').map((name) => `screenshots/${name}.png`);
     return { html, logos: getStackLogos(attributes.stack), ...attributes, gallery };
   }

@@ -13,3 +13,6 @@ node_modules
 /.cache
 /netlify/functions/server/build
 /public/build
+
+# vercel things
+/api/_build

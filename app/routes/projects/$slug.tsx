@@ -3,6 +3,7 @@ import type { LoaderFunction } from "remix";
 import { getProject, ProjectPage } from "~/project";
 import Gallery from "~/components/Gallery";
 import StackLogos from "~/components/StackLogos";
+import Image from "~/components/Image";
 
 export const loader: LoaderFunction = async ({
   params
@@ -29,7 +30,7 @@ export default function ProjectSlug() {
         <div className="flex border-t-1 border-slate-500 pt-2">
             <StackLogos logos={project.logos} size={36} />
         </div>
-        <img src={`data:image/png;base64, ${project.thumbnail}`} alt={project.thumbnail} className="m-8 h-auto w-full" />
+        <Image src={`screenshots/${project.thumbnail}.png`} alt={project.thumbnail} className="m-8 h-auto w-full" />
         <hr className="border-t-1 mb-8 w-full border-solid border-slate-500" />
         <div className="md-body" dangerouslySetInnerHTML={{ __html: project.html }} />
         <Gallery gallery={project.gallery} />
