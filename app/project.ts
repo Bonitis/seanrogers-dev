@@ -25,13 +25,15 @@ export interface ProjectPage extends Omit<ProjectMarkdownAttributes, 'gallery'> 
 }
 
 // relative to the server output not the source!
-const projectsPath = path.join(__dirname, "../../..", "projects");
+const projectsPath = path.join(__dirname, "../..", "projects");
 
 const getStackLogos = (stack: string): string[] => {
     return stack.split(' | ').map((name) => `${name}`);
 }
 
 export async function getProjects() {
+  console.log('DIRNAME: ', __dirname);
+  console.log('PROJECT PATH: ', projectsPath);
   const dir = await fs.readdir(projectsPath);
   return Promise.all(
     dir.map(async filename => {
