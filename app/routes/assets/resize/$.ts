@@ -109,7 +109,6 @@
  
    // check that file exists
    const srcPath = path.join(ASSETS_ROOT, src);
-   console.log(srcPath);
    const fileStat = statSync(srcPath);
    if (!fileStat.isFile()) {
      throw new Error(`${srcPath} is not a file`);

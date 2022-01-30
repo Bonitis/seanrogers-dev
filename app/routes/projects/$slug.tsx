@@ -13,7 +13,6 @@ export const loader: LoaderFunction = async ({
 };
 
 export const meta: MetaFunction = ({ data, params }) => {
-    console.log(data || 'HEY NO DATA')
     if (!data) return { title: params.slug || '', description: '', keywords: '' };
     return {
         title: data.title,

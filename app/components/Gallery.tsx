@@ -3,7 +3,6 @@ import Image from './Image';
 
 const Gallery: React.FC<{ gallery?: string[] }> = ({ gallery }) => {
     if (!gallery) return null;
-    console.log(gallery)
     return (
         <div className="flex flex-wrap justify-center">
             {gallery.map((path) => (
