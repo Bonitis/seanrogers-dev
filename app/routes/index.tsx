@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "remix";
 import { getProjects, Project } from "../project";
 import StackLogos from '../components/StackLogos';
+import Image from '../components/Image';
 
 export const loader = () => {
     return getProjects();
@@ -36,7 +37,13 @@ export default function Index() {
                   <Link prefetch="intent" to={`projects/${project.slug}`} className="text-indigo-800 dark:text-white hover:text-white dark:hover:text-indigo-800 hover:bg-indigo-800 dark:hover:bg-white cursor-pointer font-bold text-lg border-4 border-solid border-indigo-800 dark:border-white rounded-lg flex justify-center items-center mt-4 py-2 px-16 w-fit transition-colors">Details</Link>
                 </div>
                 <div className="rounded-lg bg-slate-100 dark:bg-slate-700 p-4 md:pb-0 md:pt-8 md:px-8 w-full md:w-8/12 h-36 sm:h-48 md:h-72 overflow-hidden">
-                  <img src={`data:image/png;base64, ${project.thumbnail}`} alt={project.thumbnail} />
+                  <Image
+                    src={`screenshots/${project.thumbnail}.png`}
+                    alt={project.thumbnail}
+                    width={600}
+                    height={400}
+                    fit="contain"
+                  />
                 </div>
               </div>
             ))}

@@ -1,18 +1,19 @@
 import React from 'react';
+import Image from './Image';
 
-const StackLogos: React.FC<{ logos?: Record<string, string>, size: number }> = ({ logos, size }) => {
-    if (!logos || Object.keys(logos).length < 1) return null;
+const StackLogos: React.FC<{ logos?: string[], size: number }> = ({ logos, size }) => {
+    if (!logos || logos.length < 1) return null;
     return (
         <>
-            {Object.keys(logos).length > 0 && Object.keys(logos).map((key: string) => {
-                return logos[key] && (
+            {logos.map((key: string) => {
+                return (
                     <div key={key} data-tooltip aria-description={key}>
-                        <img
-                            src={`data:image/png;base64, ${logos[key]}`}
+                        <Image
+                            src={`logos/${key}-logo.png`}
                             alt={key}
-                            height={`${size}px`}
-                            width={`${size}px`}
-                            style={{ padding: '4px' }}
+                            height={size}
+                            width={size}
+                            className="p-1"
                         />
                     </div>
                 )

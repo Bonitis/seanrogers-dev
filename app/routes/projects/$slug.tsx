@@ -23,7 +23,6 @@ export const meta: MetaFunction = ({ data, params }) => {
 
 export default function ProjectSlug() {
   const project = useLoaderData<ProjectPage>();
-  const gallery = project.gallery !== undefined ? project.gallery as Record<string, string> : undefined;
   return (
     <div className="w-10/12 max-w-5xl mx-auto mb-8 flex flex-col items-center justify-between py-4 dark:text-white text-slate-800">
         <h1 className="text-indigo-800 dark:text-white text-7xl mb-2 font-bold">{project.title}</h1>
