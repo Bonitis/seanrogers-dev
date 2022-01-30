@@ -16,3 +16,4 @@ node_modules
 
 # vercel things
 /api/_build
+.vercel

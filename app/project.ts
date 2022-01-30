@@ -32,8 +32,6 @@ const getStackLogos = (stack: string): string[] => {
 }
 
 export async function getProjects() {
-  console.log('DIRNAME: ', __dirname);
-  console.log('PROJECT PATH: ', projectsPath);
   const dir = await fs.readdir(projectsPath);
   return Promise.all(
     dir.map(async filename => {

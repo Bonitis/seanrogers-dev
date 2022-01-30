@@ -23,7 +23,7 @@
  import type { FitEnum } from "sharp";
  import sharp from "sharp";
  
- const ASSETS_ROOT = "assets";
+ const ASSETS_ROOT = "../../assets";
  
  interface ResizeParams {
    src: string;
@@ -108,32 +108,13 @@
    // Local filesystem
  
    // check that file exists
-   const srcPath = path.join(ASSETS_ROOT, src);
+   const srcPath = path.join(__dirname, ASSETS_ROOT, src);
    const fileStat = statSync(srcPath);
    if (!fileStat.isFile()) {
      throw new Error(`${srcPath} is not a file`);
    }
    // create a readable stream from the image file
-   return createReadStream(path.join(ASSETS_ROOT, src));
- 
-   // Other implementations that you could look into
- 
-   // Google Cloud Storage
-   // we could also create a stream directly from a bucket file
-   // import { Storage } from '@google-cloud/storage'
-   // const storage = new Storage();
-   // const bucketName = 'my-gcp-bucket'
-   // const bucketPath = src // the bucket path /dogs/cute/dog-1.jpg'
-   // return storage.bucket(bucketName).file(src).createReadStream()
- 
-   // AWS S3
-   // import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3"
-   // const s3 = new S3Client({...})
-   // const bucketName = 'my-s3-bucket'
-   // const bucketKey = src // 'dogs/cute/dog-1.jpg'
-   // const fileResult = await s3.send(new GetObjectCommand({ Bucket: bucketName, Key: bucketKey }));
-   // s3 GetObjectCommand result.Body is a ReadableStream
-   // return fileResult.Body
+   return createReadStream(srcPath);
  }
  
  function handleError(error: unknown) {
